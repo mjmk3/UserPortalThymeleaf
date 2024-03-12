@@ -15,5 +15,4 @@ import org.springframework.stereotype.Service;
 public interface UserService {
     User createUser(User user);
     boolean checkPhone(String phone);
-    boolean checkEmail(String email);
 }

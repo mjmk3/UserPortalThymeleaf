@@ -1,8 +1,10 @@
 package app.userman.Filter;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import app.userman.Entity.User;
+import app.userman.Repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.*;
+import org.springframework.stereotype.Service;
 
 /**
  * @author MJ Makki
@@ -12,9 +14,22 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
  * @since long time ago
  */
 
+@Service
 public class CustomerUserDetails implements UserDetailsService {
+
+    private UserRepository userRepository;
+
+    @Autowired
+    public CustomerUserDetails(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
-        return null;
+        User user = userRepository.findByPhone(phone);
+        if (user != null) {
+            return new UserPrincipal(user);
+        }
+        throw new UsernameNotFoundException("user not available");
     }
 }
