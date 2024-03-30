@@ -2,7 +2,7 @@
 Management portal for users with Thymeleaf engine and spring mvc 
 
 # Thymeleaf
-working with Thymeleaf Engine
+working with Thymeleaf Templating Engine
 
 # Spring MVC
 # Spring Security
